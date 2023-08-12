@@ -207,8 +207,8 @@ create_serie= lambda x: pd.DataFrame([wliq[x],wpres[x]],index=['Liquidación','O
 
 # Load Data
 
-path_conprel=Path.cwd()/'CONPREL'
-path_cesel=Path.cwd()/'CESEL'
+path_conprel=Path.cwd()#/'CONPREL'
+path_cesel=Path.cwd()#/'CESEL'
 
 conprel_liq=pickle_var(path_conprel/'CONPREL_Liq_all.pkl')
 conprel_pres=pickle_var(path_conprel/'CONPREL_Pres_all.pkl')
