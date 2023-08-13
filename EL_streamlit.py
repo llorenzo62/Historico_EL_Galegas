@@ -304,6 +304,7 @@ if resultados:
 
     plt.subplot(3,2,3)
     tmp=create_serie('Total ingresos')
+    ylabel='€'
     if trf==2:
         ylabel='€/habitante'
         for col in tmp.columns:
