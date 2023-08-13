@@ -303,23 +303,45 @@ if resultados:
     plt.hlines(0,wpres.index.min(),wpres.index.max(),color='red')
 
     plt.subplot(3,2,3)
-    plot_serie_conprel(create_serie('Total ingresos'),labely='€')
+    tmp=create_serie('Total ingresos')
+    if trf==2:
+        ylabel='€/habitante'
+        for col in tmp.columns:
+            tmp.loc[:,col]=tmp[col]/wpres['Población']
+
+    plot_serie_conprel(tmp,labely=ylabel)
     plt.title(' Ingresos ')
 
     plt.subplot(3,2,4)
-    plot_serie_conprel(create_serie('Total gastos'),labely='€')
+    tmp=create_serie('Total gastos')
+    if trf==2:
+        for col in tmp.columns:
+            tmp.loc[:,col]=tmp[col]/wpres['Población']
+
+    plot_serie_conprel(tmp,labely=ylabel)
+
     plt.title(' Gastos')
 
     plt.subplot(3,2,5)
-    plot_serie_conprel(total_cesel_a,labely='€')
+    tmp=total_cesel_a
+    if trf==2:
+        ylabel='€/habitante'
+        for col in tmp.columns:
+            tmp.loc[:,col]=tmp[col]/wpres['Población']
+
+    plot_serie_conprel(tmp,labely=ylabel)
     plt.title(' Servizos (A)')
 
     plt.subplot(3,2,6)
-    plot_serie_conprel(total_cesel_b,labely='€')
-    plt.title(' Servizos (B)')
+    tmp=total_cesel_b
+    if trf==2:
+        ylabel='€/habitante'
+        for col in tmp.columns:
+            tmp.loc[:,col]=tmp[col]/wpres['Población']
 
-    #plt.savefig('resumo.png')
-    #st.image('resumo.png',width=1200)
+    plot_serie_conprel(tmp,labely=ylabel)
+    plt.title(' Servizos (B)')
+    
     st.pyplot(figure,use_container_width=False)
 
     if trf==1:
