@@ -157,8 +157,9 @@ def analisis_cesel(wa,title=None,Total=None,trf=None):
     while ng-sum(indx)>indx.shape[0]:
         indx+=1
     total=int(ng-sum(indx))
-    indx[:(total)]=indx[:(total)]+1
-
+    if total>0:
+        indx[:(total)]=indx[:(total)]+1
+    indx=indx.astype(int)
 
     wa.loc[:,'Descripción']=wa.Descripción.map(leg_cesel)
 
@@ -172,7 +173,8 @@ def analisis_cesel(wa,title=None,Total=None,trf=None):
     for i,j in zip([0]+list(np.cumsum(indx)[:-1]),list(np.cumsum(indx))):
         key=(' or '.join([f'Descripción == "{item}"' for item in cols[int(i):int(j)]]))
         plt.subplot(nrows,2,numfig)
-        plot_serie_cesel(wa.query(key),labely=ylabel)
+        if key:
+            plot_serie_cesel(wa.query(key),labely=ylabel)
         numfig+=1
     return leg_cesel,todrop,figure
 
